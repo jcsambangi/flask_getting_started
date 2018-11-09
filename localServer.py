@@ -1,6 +1,5 @@
 from flask import Flask, jsonify, request
 from scipy.spatial import distance
-import json
 
 app = Flask(__name__)
 
@@ -10,7 +9,7 @@ def name():
     return jsonify({"name": "Jaydeep Sambangi"})
 
 
-@app.route("/hello/<name>", methods=["GET"]
+@app.route("/hello/<name>", methods=["GET"])
 def hello():
     return jsonify({"message": "Hello, there, {}".format(name)})
 
@@ -21,8 +20,13 @@ def distance():
     a = points.get("a")
     b = points.get("b")
     computed = distance.euclidean(a, b)
-    return jsonify("distance": computed, "a": a, "b": b)
+    dictComputed = {
+            "distance": computed,
+            "a":a,
+            "b":b
+    }
+    return jsonify(dictComputed)
 
 
-if __name__ = "__main__"
+if __name__ == "__main__":
     app.run(host = "127.0.0.1")
